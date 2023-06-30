@@ -1,0 +1,14 @@
+git:
+actual version control sw
+runs on cmd
+
+githubdesktop: allows to run git as desktop app
+download git
+
+use vs code.. download git extensions
+create file through vs
+
+got o github desktop - click on commit to main - click on publish - published
+
+filew private:
+right click on file in gitdesktop.. gitignore
