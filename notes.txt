@@ -13,8 +13,13 @@ got o github desktop - click on commit to main - click on publish - published
 filew private:
 right click on file in gitdesktop.. gitignore
 
+<<<<<<< Updated upstream
 create a new branch from - branch - new branch
 make all changes to that branch
 
 merging that branch:
 goto branch - merge - select that new branch - create merge
+=======
+accidentally deleted a file: 
+go to history - right click on that commit.. select revert
+>>>>>>> Stashed changes
