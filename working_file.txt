@@ -1,0 +1,104 @@
+GitHub
+https://git-scm.com/book/en/v2 
+EfficientNet:
+EfficientNet is a convolutional neural network architecture and scaling method that uniformly scales all dimensions of depth/width/resolution using a compound coefficient. Unlike conventional practice that arbitrary scales these factors, the EfficientNet scaling method uniformly scales network width, depth, and resolution with a set of fixed scaling coefficients.EfficientNet uses a technique called compound coefficient to scale up models in a simple but effective manner. Instead of randomly scaling up width, depth or resolution, compound scaling uniformly scales each dimension with a certain fixed set of scaling coefficients. Using the scaling method and AutoML, the authors of efficient developed seven models of various dimensions, which surpassed the state-of-the-art accuracy of most convolutional neural networks, and with much better efficiency.
+EfficientNet, first introduced in Tan and Le, 2019 is among the most efficient models (i.e. requiring least FLOPS for inference) that reaches State-of-the-Art accuracy on both imagenet and common image classification transfer learning tasks.
+
+EfficientNet models are defined by three key scaling factors:
+
+Depth: This refers to the number of layers in the neural network. As you move from B0 to B7, the number of layers increases, allowing the model to capture more complex features. 
+Width: Width scaling increases the number of channels (width) in each layer of the network. A wider network can capture more information in each layer, which can improve feature representation. 
+Resolution: Resolution scaling increases the input image size. A higher-resolution input image can provide more details, which can be especially beneficial for recognizing fine-grained patterns.
+
+As a result, the depth, width and resolution of each variant of the EfficientNet models are hand-picked and proven to produce good results, though they may be significantly off from the compound scaling formula. Therefore, the keras implementation (detailed below) only provide these 8 models, B0 to B7, instead of allowing arbitrary choice of width / depth / resolution parameters.
+
+The EfficientNet family typically includes models ranging from B0 to B7
+
+Base model            resolution
+-----------------------------------
+EfficientNetB0           224
+EfficientNetB1           240
+EfficientNetB2           260
+EfficientNetB3           300
+EfficientNetB4           380
+EfficientNetB5           456
+EfficientNetB6           528
+EfficientNetB7           600
+
+Convolutional Neural Network:
+A convolutional neural network (CNN) is a type of artificial neural network used primarily for image recognition and processing, due to its ability to recognize patterns in images.
+
+The data gets into the CNN through the input layer and passes through various hidden layers before getting to the output layer.
+The output layer is the prediction of the network. The output of the network is compared to the actual labels in terms of loss or error.
+
+
+1) Layer function:
+It consists of Basic transforming function such as convolutional or fully connected layer.
+The most commonly used layer functions are the fully connected, convolutional, and transposed convolutional layers.
+Convolutional Layer:
+Following are the 3 parameters used to define a convolutional layer
+Filter Size K: The size of the sliding filter.
+Stride Length S: Defines how much is the filter slid before the dot product is carried out to generate the output pixel.
+Padding P:
+After applying 3 by 3 filter to 4 by 4 image, we get a 2 by 2 image – Size of the image has gone down
+If we want to keep image size the same, we can use padding, We pad input in every direction with 0’s before applying filter:
+If padding is 1 by 1, then we add 1 zero in every direction
+Let consider image of size 6*6 pixel and value in below matrix represents pixel value of image. And we have filter of size 3*3 pixel.
+Thus convolutional operation between this image and filter will generate 4*4 resultant matrix .
+	
+Values of this matrix can obtained by superimposing this filter on this image and using this as sling window.
+.Now multiply values in each cell and add all values together.
+After this slide this window by one pixel to the right again multiply individual value and add them together to generate output number and place output number in 4*4 matrix.
+
+
+And finally we will get output number for all cell,We can say that any image of size n*n convolved with filter f*f will generate output of (n-f+1)*(n-f+1).
+
+2) Pooling:
+The most commonly used poolings are Max, average pooling, and max average unpooling.
+a. Max Pooling:
+Max Pooling is a pooling operation that calculates the maximum value for patches of a feature map, and uses it to create a downsampled (pooled) feature map. It is usually used after a convolutional layer.
+Example: filter of size 2*2 and stride=2
+It will taker max value and put it in resultant matrix and shift 2 pixel to the right and put it in resultant matrix and shift 2 pixel to the right
+
+b Average Pooling:
+
+
+3) Normalization:
+Normalization is usually used just before the activation functions to limit the unbounded activation from increasing the output layer values too high.
+There are two types of normalization techniques usually used
+a) Local Response Normalization(LRN)
+b) Batch Normalization (BN)
+LRN is non non-trainable layer whereas BN is trainable layer.
+4) Activation
+The main purpose of activation functions is to introduce non-linearity so CNN can efficiently map nonlinear complex mapping between the input and output.
+Multiple activation functions are available and used based on the underlying requirements.
+Preferred activation function in CNN is the rectified linear unit(ReLU).
+ReLU leaves outputs with positive values as is, and replaces negative values with 0.
+Loss Calculation:
+ Once you have defined your CNN, a loss function needs to be picked that quantifies how far off the CNN prediction is from the actual labels.
+Regression Loss Functions
+Mean Absolute Error
+Mean Square Error
+Huber Loss
+Classification Loss Functions
+Cross-Entropy: The estimated value and labels are probability (0,1)
+Hinge Loss: The estimated value and labels are real numbers
+Backpropagation:
+Backpropagation Algorithm is a supervised learning algorithm used to train neural networks.
+It is based on the concept of backpropagation, which is a method of training neural networks by propagating the errors from the output layer back to the input layer.
+
+Fine-Tuning:
+In deep learning, fine-tuning is an approach to transfer learning in which the weights of a pre-trained model are trained on new data. Fine-tuning can be done on the entire neural network, or on only a subset of its layers, in which case the layers that are not being fine-tuned are "frozen" (not updated during the backpropagation step).A model may also be augmented with "adapters" that consist of far fewer parameters than the original model, and fine-tuned in a parameter-efficient way by tuning the weights of the adapters and leaving the rest of the model's weights frozen.
+For some architectures, such as convolutional neural networks, it is common to keep the earlier layers (those closest to the input layer) frozen because they capture lower-level features, while later layers often discern high-level features that can be more related to the task that the model is trained on.
+Models that are pre-trained on large and general corpora are usually fine-tuned by reusing the model's parameters as a starting point and adding a task-specific layer trained from scratch.[5] Fine-tuning the full model is common as well and often yields better results, but it is more computationally expensive.
+Fine-tuning is typically accomplished with supervised learning, but there are also techniques to fine-tune a model using weak supervision. Fine-tuning can be combined with a reinforcement learning from human feedback-based objective to produce language models like ChatGPT (a fine-tuned version of GPT-3) and Sparrow.
+Fine-tuning, in the context of machine learning and deep learning, refers to the process of taking a pre-trained neural network model and adapting it for a specific task or dataset. Instead of training a model from scratch, fine-tuning starts with a pre-trained model that has already learned valuable features and representations from a large and diverse dataset. Fine-tuning involves making adjustments to the model's parameters while training on a smaller, task-specific dataset. Here's how the process generally works:
+Pre-trained Model: Begin with a pre-trained neural network model, often trained on a large dataset for a general task such as image classification, object detection, or natural language processing.
+Task-Specific Data: Gather a dataset specific to the task you want to solve. This dataset is typically smaller and may contain labelled examples relevant to your task.
+Unfreeze Layers: Unfreeze or partially unfreeze some of the layers in the pre-trained model, especially the top layers. This allows the model to adapt its learned features to the new task while retaining the knowledge from the pre-training.
+Fine-tuning: Train the model on the task-specific dataset using the pre-trained model as an initial starting point. The model's weights are updated based on the new dataset, and it learns to make task-specific predictions.
+Hyperparameter Tuning: Adjust hyperparameters such as learning rate, batch size, and regularization techniques to optimize the model's performance for the specific task.
+Evaluation: Evaluate the fine-tuned model on a validation dataset to monitor its performance. You may iterate on fine-tuning and hyperparameter tuning based on the validation results.
+Testing: Finally, assess the fine-tuned model's performance on a separate test dataset to gauge its real-world accuracy and generalization
+Fine-tuning is a powerful technique because it leverages the knowledge stored in pre-trained models, which have typically learned useful features and representations from massive datasets. 
+This process is commonly used in transfer learning, where models are adapted for new tasks with limited labeled data, saving both time and computational resources. Fine-tuning can be applied to various types of deep learning models, including convolutional neural networks (CNNs) for image-related tasks and recurrent neural networks (RNNs) for sequential data tasks.
